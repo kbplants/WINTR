@@ -21,3 +21,6 @@ This Python script generates transcript- and gene-level TPM expression matrices 
 
 This script, originally from the StringTie repository (https://github.com/gpertea/stringtie/blob/master/prepDE.py), generates gene- and transcript-level read count matrices from a set of GTF files produced by stringtie -e. It parses coverage data and calculates counts based on transcript lengths and read coverage, supporting optional clustering of overlapping genes. The results are written to two CSV files (gene_count_matrix.csv and transcript_count_matrix.csv). 
 
+**rna_env.yml**
+The rna_env.yml file defines the Conda environment required to run the RNA-seq processing pipeline. It includes all necessary software dependencies—such as trimmomatic, hisat2, samtools, stringtie, fastqc, python
+
