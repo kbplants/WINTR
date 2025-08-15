@@ -1,4 +1,4 @@
-nextflow.enable.dsl=2
+nextflow.enable.dsl=21
 
 
 ctab_ch = Channel.fromPath("${params.data_dir}/stringtie_out/*/*_t_data_with_tpm.ctab")
