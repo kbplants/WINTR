@@ -1,0 +1,72 @@
+Mediation results table (`mediation_results.tsv`)
+===============================================
+
+This file contains one row per SNP–cis-gene–trans-gene triplet. For each triplet, three linear regression models are fitted on the aligned genotype and expression data; all reported quantities are derived from the estimated regression coefficients (effect sizes) and their standard errors from those models.
+
+Column definitions
+------------------
+
+**Identifiers**
+
+- **snps**  
+  SNP (variant) identifier.
+
+- **cis_gene**  
+  Cis (putative mediator) gene identifier.
+
+- **trans_gene**  
+  Trans (outcome) gene identifier.
+
+**Regression coefficients and standard errors**
+
+Notation: `x_snp` = SNP genotype (0, 1, or 2); `x_cis` = cis_gene expression; `y_trans` = trans_gene expression. All regressions are ordinary least squares (OLS) over the set of individuals with non-missing data.
+
+- **a**  
+  Regression coefficient of `x_snp` in the model `x_cis ~ x_snp` (path a: SNP → cis). Estimated change in cis expression per one-unit increase in genotype.
+
+- **se_a**  
+  Standard error of the coefficient `a` from the same regression (square root of the estimated variance of the coefficient).
+
+- **b_unadj**  
+  Regression coefficient of `x_snp` in the model `y_trans ~ x_snp` (total effect of SNP on trans, unadjusted for mediator).
+
+- **se_b_unadj**  
+  Standard error of `b_unadj`.
+
+- **b_adj**  
+  Regression coefficient of `x_snp` in the model `y_trans ~ x_snp + x_cis` (direct effect of SNP on trans, adjusted for cis expression).
+
+- **se_b_adj**  
+  Standard error of `b_adj`.
+
+- **b_mediator**  
+  Regression coefficient of `x_cis` in the model `y_trans ~ x_snp + x_cis` (effect of cis expression on trans, conditional on SNP).
+
+- **se_b_mediator**  
+  Standard error of `b_mediator`.
+
+**Mediation proportion**
+
+- **mediation_prop**  
+  Proportion of the absolute total effect that is attenuated when conditioning on the mediator:  
+  (|b_unadj| − |b_adj|) / |b_unadj|.  
+  Bounded conceptually between 0 (no attenuation) and 1 (full attenuation). Values outside [0, 1] can occur when |b_unadj| is very small or when sign flips occur; such cases should be interpreted with caution.
+
+**Indirect effect and Sobel test**
+
+- **indirect_effect**  
+  Product a × b_mediator, i.e. the point estimate of the indirect (mediated) effect along the path SNP → cis → trans.
+
+- **se_indirect**  
+  Sobel standard error for the indirect effect: sqrt( b_mediator² × se_a² + a² × se_b_mediator² ).
+
+- **z_sobel**  
+  Sobel z-statistic: indirect_effect / se_indirect (Wald test statistic for the indirect effect).
+
+- **p_sobel**  
+  Two-sided p-value for the indirect effect under the null that the indirect effect is zero (from the standard normal distribution using z_sobel). Used to assess statistical significance of mediation.
+
+**Sample size**
+
+- **n_samples**  
+  Number of individuals with complete data (non-missing genotype and both gene expressions) used in the three regressions for this triplet. Affects the precision of all coefficient and standard error estimates.
