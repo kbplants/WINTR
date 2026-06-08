@@ -1,1 +1,1 @@
-For eQTL Mapping, refer to only the script which says run_eqtl_pipeline.sh. Population structure is taken care of in the pipeline. 
+For eQTL Mapping, refer to only the script which says run_eqtl_pipeline.sh. Population structure is taken care in the pipeline. 
