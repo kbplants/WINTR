@@ -1,1 +1,1 @@
-eQTL Mapping
+For eQTL Mapping, refer to only the script which says run_eqtl_pipeline.sh. 
